@@ -1,0 +1,18 @@
+ID,VERSION,CONFIGURATION,MODE,NUMERALS,CHARACTERS,
+
+LEX, LEXME, GRAMMAR,PERMANENT
+DB, TABLE
+MEMORY, FILE
+INDEX, END INDEX
+PERMANENT, TEMPORARY
+RULE
+LIST,END
+
+%,!
+case '"':	// Start of "string"
+case '!':	// Start of comment
+case '@':	// Start of symbol
+case '$':	// Start of system variable
+
+if (fragmentText.StartsWith("$N") || fragmentText.StartsWith("$S"))
+	if (fragmentText.StartsWith("N.") || fragmentText.StartsWith("S."))

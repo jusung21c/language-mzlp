@@ -1,0 +1,127 @@
+'scopeName': 'source.DEFINITION'
+'name': 'DEFINITION'
+'fileTypes': ['DEFINITION']
+
+'patterns': [
+  {
+    'match': '\\b(?i:(JINIE|EOP|PERMANENT|TEMPORARY|BEGIN|END|WHILE|DO|IF|THEN|ELSE|CALL|MESSAGE))\\b'
+    #'match': '\\b(?i:(JINIE|EOP|PERMANENT|TEMPORARY|NUMBER|STRING|BEGIN|END|WHILE|DO|IF|THEN|ELSE|CALL|LOG|MESSAGE))\\b'
+    'name': 'storage.type.method'
+  }
+  {
+    'match': '(\\(|\\s)(?i:(NUMBER|LOG|STRING))\\s'
+    'name': 'storage.type.method'
+  }
+
+  {
+    'match': '\\b(?i:(VERSION|TRUE|FALSE|BEGIN|END|CONFIGURATION|SCENARIO|LEXICON|LEXEME|SYMBOL|LITERAL|LIST|POOL|TREE|INDEX|FILE|MEMORY|PERMANENT|TEMPORARY|JINIE|TRACE|SIZE|FIELD|RECORD|NUMERALS|CHARACTERS|DUPLICATION|ORDER|UNIFORM|INITIALIZER|PREPROCESSOR|RECOGNIZER|POSTPROCESSOR|UNINITIALIZER|SEMANTIC|CONFIG|FEATURE|WORD|CLUSTER|COMBINATION|MOMENTARY|STATISTIC))\\b'
+    #'match': '\\b(?i:(JINIE|EOP|PERMANENT|TEMPORARY|NUMBER|STRING|BEGIN|END|WHILE|DO|IF|THEN|ELSE|CALL|LOG|MESSAGE))\\b'
+    'name': 'storage.type.method'
+  }
+  {
+    'match': '(\\(|\\s)(?i:(DIALOG|ID|PROMPT|GRAMMAR|DB|RULE|SETTING|PROGRAM|TABLE|LEX|TYPE|MODE|REFERENCE))\\b'
+    'name': 'storage.type.method'
+  }
+
+
+   {
+    'match': '(;)'
+    'name': 'constant.numeric'
+  }
+
+  {
+   'match': '(:=|~=)'
+   'name': 'entity.name.function'
+ }
+
+  {#메소드
+    'captures':
+      '1':
+        'name': 'entity.name.function'
+    'match': '\\b([\\w\\.]+)\\s*+\\([\\w+\\s\\b,.]*\\)'
+    'name': 'meta.function.prototype.pascal'
+  }
+
+  {#@으로 시작
+    'captures':
+      '1':
+        'name': 'constant'
+      '2':
+        'name': 'storage.type.prototype.pascal'
+    'match': '((\\s|)@\\w+)'
+    'name': 'meta.function.prototype.pascal'
+  }
+
+  {
+    'match': '\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b'
+    'name': 'constant.numeric'
+  }
+
+
+
+  {
+    'begin': '(^[ \\t]+)?(?=!|%)'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.whitespace.comment.leading.pascal'
+    'end': '(?!\\G)'
+    'patterns': [
+      {
+        'begin': '(!|%)'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.comment.pascal'
+        'end': '\\n'
+        'name': 'comment.line.double-slash.pascal.two'
+      }
+    ]
+  }
+
+
+  {
+    'begin': '\\(\\*'
+    'captures':
+      '0':
+        'name': 'punctuation.definition.comment.pascal'
+    'end': '\\*\\)'
+    'name': 'comment.block.pascal.one'
+  }
+
+
+  {
+      'begin': '"'
+      'beginCaptures':
+        '0':
+          'name': 'punctuation.definition.string.begin.java'
+      'end': '"'
+      'endCaptures':
+        '0':
+          'name': 'punctuation.definition.string.end.java'
+      'name': 'string.quoted.double.java'
+      'patterns': [
+        {
+          'match': '\\\\.'
+          'name': 'constant.character.escape.java'
+        }
+      ]
+  }
+
+  {
+    'applyEndPatternLast': 1
+    'begin': '\''
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.pascal'
+    'end': '(\'|\\n)'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.pascal'
+    'name': 'string.quoted.single.pascal'
+    'patterns': [
+      {
+        'match': '\'\''
+        'name': 'constant.character.escape.apostrophe.pascal'
+      }
+    ]
+  }
+]
