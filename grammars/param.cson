@@ -1,0 +1,47 @@
+'scopeName': 'source.param'
+'name': 'param'
+'fileTypes': ['param']
+
+'patterns': [
+  {
+    'match': '=[\\w+\\s\\b,.-]*[\\n]'
+    'name': 'constant.numeric'
+  }
+
+
+  {
+    'begin': '(^[ \\t]+)?(?=#)'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.whitespace.comment.leading.pascal'
+    'end': '(?!\\G)'
+    'patterns': [
+      {
+        'begin': '(#)'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.comment.pascal'
+        'end': '\\n'
+        'name': 'comment.line.double-slash.pascal.two'
+      }
+    ]
+  }
+{
+    'begin': '\\['
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.java'
+    'end': '\\]'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.java'
+    'name': 'string.quoted.double.java'
+    'patterns': [
+      {
+        'match': '\\\\.'
+        'name': 'constant.character.escape.java'
+      }
+    ]
+}
+
+]
