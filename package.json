@@ -56,7 +56,7 @@
     "type": "git",
     "url": "git+https://github.com/jusung21c/language-mzlp.git"
   },
-  "version": "0.4.0",
+  "version": "0.4.1",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [],
