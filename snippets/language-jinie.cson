@@ -1,5 +1,16 @@
 '.source.DEFINITION':
-
+  'IF-THEN':
+    'prefix' : 'if'
+    'body': 'IF ${0} THEN\n'
+  'BEGIN-END':
+    'prefix' : 'begin'
+    'body': 'BEGIN\n\t${0}\nEND\n'
+  'JINIE-EOP':
+    'prefix' : 'jinie'
+    'body': 'JINIE ${1}\n\t\n\t${2}\nEND\n'
+  'test':
+    'prefix' : 'test'
+    'body': 'JINIE ${1/filename}\n\t\n\t${2}\nEND\n'
 
   'N.ACCURACY':
   	'prefix':'N.ACCURACY'
