@@ -1,84 +1,81 @@
-'scopeName': 'source.DEFINITION'
-'name': 'DEFINITION'
-'fileTypes': ['DEFINITION']
-
+'scopeName': 'source.SCENARIO'
+'name': 'SCENARIO'
+'fileTypes': ['SCENARIO']
 'patterns': [
   {
-    'match': '\\b(?i:(JINIE|EOP|PERMANENT|TEMPORARY|BEGIN|END|WHILE|DO|IF|THEN|ELSE|CALL|MESSAGE))\\b'
+    'match': '\\b(DIALOG:|END\\s+DIALOG)'
     #'match': '\\b(?i:(JINIE|EOP|PERMANENT|TEMPORARY|NUMBER|STRING|BEGIN|END|WHILE|DO|IF|THEN|ELSE|CALL|LOG|MESSAGE))\\b'
-    #'name': 'storage.type.method'
-    'name': 'storage'
-  }
-  {
-    'match': '(\\(|\\s)(?i:(NUMBER|LOG|STRING))\\s'
-    #'name': 'storage.type.method'
-    'name': 'storage'
+    'name': 'variable'
   }
 
   {
-    'match': '\\b(?i:(VERSION|TRUE|FALSE|BEGIN|END|CONFIGURATION|SCENARIO|LEXICON|LEXEME|SYMBOL|LITERAL|LIST|POOL|TREE|INDEX|FILE|MEMORY|PERMANENT|TEMPORARY|JINIE|TRACE|SIZE|FIELD|RECORD|NUMERALS|CHARACTERS|DUPLICATION|ORDER|UNIFORM|INITIALIZER|PREPROCESSOR|RECOGNIZER|POSTPROCESSOR|UNINITIALIZER|SEMANTIC|CONFIG|FEATURE|WORD|CLUSTER|COMBINATION|MOMENTARY|STATISTIC))\\b'
+    'match': '\\b(RULE:|END RULE|SCENARIO:|END SCENARIO)'
     #'match': '\\b(?i:(JINIE|EOP|PERMANENT|TEMPORARY|NUMBER|STRING|BEGIN|END|WHILE|DO|IF|THEN|ELSE|CALL|LOG|MESSAGE))\\b'
-    #'name': 'storage.type.method'
-    'name': 'storage'
-  }
-  {
-    'match': '(\\(|\\s)(?i:(DIALOG|ID|PROMPT|GRAMMAR|DB|RULE|SETTING|PROGRAM|TABLE|LEX|TYPE|MODE|REFERENCE))\\b'
     'name': 'storage'
   }
 
   {
    'match': '(:=|~=|\\||;|&)'
    'name': 'constant.character.escape'
- }
+  }
+
+
 
   {#메소드
     'captures':
       '1':
-        'name': 'variable'
-    'match': '\\b([\\w.]*)\\s*+\\([\\w+\\s\\b,.]*\\)'
+        'name': 'entity.name.function'
+    'match': '\\b([\\w\\.]+)\\s*+\\([\\w+\\s\\b,.]*\\)'
     'name': 'meta.function.prototype.pascal'
   }
 
   {#@으로 시작
-    'match': '(?:|)@[\\w._]*'
-    'name': 'constant'
+    'captures':
+      '1':
+        'name': 'constant'
+      '2':
+        'name': 'storage.type.prototype.pascal'
+    'match': '((\\s|)@\\w+)'
+    'name': 'meta.function.prototype.pascal'
   }
 
-  {#숫자
+  {
     'match': '\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b'
-    'name': 'constant'
+    'name': 'constant.numeric'
   }
 
 
-  {#!.% 주석처리
+
+  {
     'begin': '(^[ \\t]+)?(?=!|%)'
     'beginCaptures':
       '1':
-        'name': 'comment'
+        'name': 'punctuation.whitespace.comment.leading.pascal'
     'end': '(?!\\G)'
     'patterns': [
       {
         'begin': '(!|%)'
         'beginCaptures':
           '0':
-            'name': 'comment'
+            'name': 'punctuation.definition.comment.pascal'
         'end': '\\n'
-        'name': 'comment'
+        'name': 'comment.line.double-slash.pascal.two'
       }
     ]
   }
 
 
-  {#쌍따옴표 처리
+
+  {
       'begin': '"'
       'beginCaptures':
         '0':
-          'name': 'constant'
+          'name': 'punctuation.definition.string.begin.java'
       'end': '"'
       'endCaptures':
         '0':
-          'name': 'constant'
-      'name': 'string'
+          'name': 'punctuation.definition.string.end.java'
+      'name': 'string.quoted.double.java'
       'patterns': [
         {
           'match': '\\\\.'

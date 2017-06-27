@@ -4,10 +4,9 @@
 
 'patterns': [
   {
-    'match': '=[\\w+\\s\\b,.-]*[\\n]'
+    'match': '=[\\w+\\s\\b,.-/]*[\\n]'
     'name': 'constant.numeric'
   }
-
 
   {
     'begin': '(^[ \\t]+)?(?=#)'
