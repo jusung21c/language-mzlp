@@ -1,16 +1,36 @@
 '.source.DEFINITION':
   'IF-THEN':
-    'prefix' : 'if'
-    'body': 'IF ${0} THEN\n'
+    'prefix' : 'IF THEN'
+    'body': 'IF ${1} THEN\n\t${2}'
+  'IF-THEN-ELSE-END':
+    'prefix' : 'IF THEN ELSE END'
+    'body': 'IF ${1} THEN\n\t${2}\nELSE\n\t${3}\nEND'
   'BEGIN-END':
     'prefix' : 'begin'
     'body': 'BEGIN\n\t${0}\nEND\n'
   'JINIE-EOP':
     'prefix' : 'jinie'
-    'body': 'JINIE ${1}\n\t\n\t${2}\nEND\n'
-  'test':
-    'prefix' : 'test'
-    'body': 'JINIE ${1/filename}\n\t\n\t${2}\nEND\n'
+    'body': 'JINIE ${1:function}\n\t${2}\nEOP\n'
+
+  'Pre.':
+    'prefix' : 'Pre'
+    'body': 'Pre.${1:func} (${2})'
+  'Post.':
+    'prefix' : 'Post'
+    'body': 'Post.${1:func} (${2})'
+  'Common.':
+    'prefix' : 'Common'
+    'body': 'Common.${1:func} (${2})'
+  'LpProc.':
+    'prefix' : 'LpProc'
+    'body': 'LpProc.${1:func} (${2})'
+  'System.':
+    'prefix' : 'System'
+    'body': 'System.${1:func} (${2}) '
+  'Call.':
+    'prefix' : 'Call'
+    'body': 'Call ${1:func} ;'
+
 
   'N.ACCURACY':
   	'prefix':'N.ACCURACY'

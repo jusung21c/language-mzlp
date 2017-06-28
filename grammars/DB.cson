@@ -1,0 +1,108 @@
+'scopeName': 'source.DB'
+'name': 'DB'
+'fileTypes': ['DB']
+
+'patterns': [
+  {
+    'match': '\\b(?i:(JINIE|EOP|PERMANENT|TEMPORARY|BEGIN|END|WHILE|DO|IF|THEN|ELSE|CALL|MESSAGE))\\b'
+    #'match': '\\b(?i:(JINIE|EOP|PERMANENT|TEMPORARY|NUMBER|STRING|BEGIN|END|WHILE|DO|IF|THEN|ELSE|CALL|LOG|MESSAGE))\\b'
+    #'name': 'storage.type.method'
+    'name': 'storage'
+  }
+  {
+    'match': '(\\(|\\s)(?i:(NUMBER|LOG|STRING))\\s'
+    #'name': 'storage.type.method'
+    'name': 'storage'
+  }
+
+  {
+    'match': '\\b(?i:(VERSION|TRUE|FALSE|BEGIN|END|CONFIGURATION|SCENARIO|LEXICON|LEXEME|SYMBOL|LITERAL|LIST|POOL|TREE|INDEX|FILE|MEMORY|PERMANENT|TEMPORARY|JINIE|TRACE|SIZE|FIELD|RECORD|NUMERALS|CHARACTERS|DUPLICATION|ORDER|UNIFORM|INITIALIZER|PREPROCESSOR|RECOGNIZER|POSTPROCESSOR|UNINITIALIZER|SEMANTIC|CONFIG|FEATURE|WORD|CLUSTER|COMBINATION|MOMENTARY|STATISTIC))\\b'
+    #'match': '\\b(?i:(JINIE|EOP|PERMANENT|TEMPORARY|NUMBER|STRING|BEGIN|END|WHILE|DO|IF|THEN|ELSE|CALL|LOG|MESSAGE))\\b'
+    #'name': 'storage.type.method'
+    'name': 'storage'
+  }
+  {
+    'match': '(\\(|\\s)(?i:(DIALOG|ID|PROMPT|GRAMMAR|DB|RULE|SETTING|PROGRAM|TABLE|LEX|TYPE|MODE|REFERENCE))\\b'
+    'name': 'storage'
+  }
+
+  {
+   'match': '(:=|~=|\\||;|&)'
+   'name': 'constant.character.escape'
+ }
+
+  {#메소드
+    'captures':
+      '1':
+        'name': 'variable'
+    'match': '\\b([\\w.]*)\\s*+\\([\\w+\\s\\b,.]*\\)'
+    'name': 'meta.function.prototype.pascal'
+  }
+
+  {#@으로 시작
+    'match': '(?:|)@[\\w._]*'
+    'name': 'constant'
+  }
+
+  {#숫자
+    'match': '\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b'
+    'name': 'constant'
+  }
+
+
+  {#!.% 주석처리
+    'begin': '(^[ \\t]+)?(?=!|%)'
+    'beginCaptures':
+      '1':
+        'name': 'comment'
+    'end': '(?!\\G)'
+    'patterns': [
+      {
+        'begin': '(!|%)'
+        'beginCaptures':
+          '0':
+            'name': 'comment'
+        'end': '\\n'
+        'name': 'comment'
+      }
+    ]
+  }
+
+
+  {#쌍따옴표 처리
+      'begin': '"'
+      'beginCaptures':
+        '0':
+          'name': 'constant'
+      'end': '"'
+      'endCaptures':
+        '0':
+          'name': 'constant'
+      'name': 'string'
+      'patterns': [
+        {
+          'match': '\\\\.'
+          'name': 'constant.character.escape.java'
+        }
+      ]
+  }
+
+  {
+    'applyEndPatternLast': 1
+    'begin': '\''
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.pascal'
+    'end': '(\'|\\n)'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.pascal'
+    'name': 'string.quoted.single.pascal'
+    'patterns': [
+      {
+        'match': '\'\''
+        'name': 'constant.character.escape.apostrophe.pascal'
+      }
+    ]
+  }
+]
